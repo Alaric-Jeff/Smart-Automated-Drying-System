@@ -1,2 +1,5 @@
+/src/serviceAccountKey.json
 /node_modules
+/dist
+
 .env
