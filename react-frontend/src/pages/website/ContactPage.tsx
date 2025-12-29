@@ -34,8 +34,8 @@ export function ContactPage() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Call Us</h3>
             <p className="text-gray-500 mb-4">Mon-Fri from 9am to 6pm</p>
-            <a href="tel:+15551234567" className="text-blue-600 font-medium hover:underline">
-              +1 (555) 123-4567
+            <a href="tel:+631231234567" className="text-blue-600 font-medium hover:underline">
+              +63 123 123-4567
             </a>
           </div>
 
@@ -45,11 +45,11 @@ export function ContactPage() {
               <MapPin size={32} />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Visit Us</h3>
-            <p className="text-gray-500 mb-4">Innovation Lab</p>
+            <p className="text-gray-500 mb-4">Comlab 303</p>
             <p className="text-gray-900 font-medium">
-              Tech University Campus
+              University of Caloocan City
               <br />
-              123 Innovation Drive
+              Congressional Campus
             </p>
           </div>
         </div>
