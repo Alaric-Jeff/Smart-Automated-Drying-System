@@ -1,9 +1,9 @@
 import Fastify from "fastify";
 import firebaseAdminPlug from "./plugins/firebase-admin-plug.js";
 import firestorePlug from "./plugins/firestore-plug.js";
-import { debugFirestoreRoutes } from "./debugRoutes.js";
+import firebaseAuthPlug from "./plugins/firebase-auth-plug.js";
 import { healthRoutes } from "./healthCheck.js";
-const server = Fastify({ logger: true });
+const server = Fastify({ logger: true }).withTypeProvider();
 if (!process.env.HTTP_PORT || !process.env.HOST) {
     server.log.error("Missing required environment variables");
     console.log(String(process.env.HTTP_PORT));
@@ -12,8 +12,8 @@ if (!process.env.HTTP_PORT || !process.env.HOST) {
 }
 await server.register(firebaseAdminPlug);
 await server.register(firestorePlug);
+await server.register(firebaseAuthPlug);
 await server.register(healthRoutes);
-await server.register(debugFirestoreRoutes);
 try {
     await server.listen({
         port: Number(process.env.HTTP_PORT),

@@ -1,9 +1,11 @@
 import Fastify from "fastify";
 import firebaseAdminPlug from "./plugins/firebase-admin-plug.js";
 import firestorePlug from "./plugins/firestore-plug.js";
+import firebaseAuthPlug from "./plugins/firebase-auth-plug.js";
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { healthRoutes } from "./healthCheck.js";
 
-const server = Fastify({ logger: true });
+const server = Fastify({ logger: true }).withTypeProvider<TypeBoxTypeProvider>();
 
 if (!process.env.HTTP_PORT || !process.env.HOST) {
   server.log.error("Missing required environment variables");
@@ -14,6 +16,7 @@ if (!process.env.HTTP_PORT || !process.env.HOST) {
 
 await server.register(firebaseAdminPlug);
 await server.register(firestorePlug);
+await server.register(firebaseAuthPlug)
 await server.register(healthRoutes);
 
 try {
@@ -25,4 +28,4 @@ try {
 } catch (err) {
   server.log.error(err);
   process.exit(1);
-}
+} 
