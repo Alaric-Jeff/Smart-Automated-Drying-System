@@ -2,8 +2,11 @@ import Fastify from "fastify";
 import firebaseAdminPlug from "./plugins/firebase-admin-plug.js";
 import firestorePlug from "./plugins/firestore-plug.js";
 import firebaseAuthPlug from "./plugins/firebase-auth-plug.js";
+import { userRoutes } from "./user-component/router/index.js";
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { healthRoutes } from "./healthCheck.js";
+import cors from '@fastify/cors'
+import bcryptPlugin from "./plugins/bcrypt-plugin.js";
 
 const server = Fastify({ logger: true }).withTypeProvider<TypeBoxTypeProvider>();
 
@@ -14,10 +17,27 @@ if (!process.env.HTTP_PORT || !process.env.HOST) {
   process.exit(1);
 }
 
+await server.register(cors, {
+  origin: [
+    "http://localhost:59242", 
+    "http://localhost:3000",  
+    "http://localhost:62863",
+    "http://localhost:56498",
+    "http://localhost:63266",
+    
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+});
+
 await server.register(firebaseAdminPlug);
 await server.register(firestorePlug);
-await server.register(firebaseAuthPlug)
+// await server.register(firebaseAuthPlug)
 await server.register(healthRoutes);
+await server.register(bcryptPlugin)
+
+server.register(userRoutes, {prefix: "/user"})
 
 try {
   await server.listen({

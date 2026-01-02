@@ -14,6 +14,8 @@ export default fp(async (fastify) => {
   fastify.addHook("preHandler", async (req, reply: FastifyReply) => {
     const auth = req.headers.authorization;
 
+    fastify.log.info(`user: ${auth}`)
+
     if (!auth?.startsWith("Bearer ")) {
       reply.code(401).send({ error: "Missing Authorization header" });
       return;
