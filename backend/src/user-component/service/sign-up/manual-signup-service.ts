@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import type { manualSignUpType } from "../../schemas/create-user-schema-req.js";
+import { Timestamp } from "firebase-admin/firestore";
 
 /**
  * Manual Sign-Up Service
@@ -55,7 +56,8 @@ export async function manualSignUpService(
       photoUrl: null,
       address: null,
       contactNumber: null,
-      devices: []
+      devices: [],
+      createdAt: Timestamp.now()
     });
 
     return { success: true, message: "USER_CREATED" };

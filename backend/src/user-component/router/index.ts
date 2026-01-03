@@ -1,6 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import { signUpRouter } from "./signup-router.js";
 import { signInRouter } from "./signin-router.js";
+import { personalInfoRoutes } from "./personal-info-router.js";
 
 /**
  * @description Routes registry for user component
@@ -12,4 +13,5 @@ export function userRoutes(
 ){
     fastify.register(signUpRouter, {prefix: "/signup"})
     fastify.register(signInRouter, {prefix: "/signin"})
+    fastify.register(personalInfoRoutes, {prefix: "/personal-info"})
 }

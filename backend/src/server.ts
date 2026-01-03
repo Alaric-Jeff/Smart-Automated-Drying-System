@@ -24,9 +24,13 @@ await server.register(cors, {
     "http://localhost:62863",
     "http://localhost:56498",
     "http://localhost:63266",
-    
+    "http://localhost:63395",
+    "http://localhost:53642",
+    "http://localhost:60576",
+    "http://localhost:63401",
+    "http://localhost:56225",
   ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 });

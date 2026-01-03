@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import type { ssoSignUpType } from "../../schemas/create-user-schema-req.js";
+import { Timestamp } from "firebase-admin/firestore";
 
 export async function ssoSignUpService(
   fastify: FastifyInstance,
@@ -27,15 +28,16 @@ export async function ssoSignUpService(
     await userCollection.doc(uuid).set({
       uuid,
       displayName,
-      firstName: "", // optional, not provided by SSO
-      lastName: "",  // optional, not provided by SSO
-      email: null,   // SSO may not provide email depending on scope
+      firstName: "", 
+      lastName: "", 
+      email: null,   
       password: null,
       signInProvider,
       photoUrl: photoUrl ?? null,
       address: null,
       contactNumber: null,
-      devices: []
+      devices: [],
+       createdAt: Timestamp.now()
     });
 
     return { success: true, message: "USER_CREATED" };

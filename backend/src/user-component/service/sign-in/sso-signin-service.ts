@@ -2,13 +2,13 @@ import type { FastifyInstance } from "fastify";
 import type admin from "firebase-admin"; // for type only
 
 /**
- * Verifies a Firebase ID token and returns the decoded token.
- * Throws known errors for easier controller mapping.
+ * @description Verifies a Firebase ID token and returns the decoded token.
+ * 
  */
 export async function verifyIdToken(
   fastify: FastifyInstance,
   token: string
-): Promise<admin.auth.DecodedIdToken> {  // <-- explicit type
+): Promise<admin.auth.DecodedIdToken> {  
   try {
     const decodedToken = await fastify.firebaseAdmin.auth().verifyIdToken(token);
     return decodedToken;
